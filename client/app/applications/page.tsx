@@ -1,8 +1,8 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { Input, Kbd } from "@nextui-org/react";
-import { Checkbox, Image } from "@nextui-org/react";
-import { FaSearch } from "react-icons/fa";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { Input, Kbd } from '@nextui-org/react';
+import { Checkbox, Image } from '@nextui-org/react';
+import { FaSearch } from 'react-icons/fa';
 
 interface Application {
   name: string;
@@ -14,18 +14,18 @@ interface Application {
 export default function ApplicationsPage() {
   const [data, setData] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+  const [searchQuery, setSearchQuery] = useState('');
+  const [checkedItems, setCheckedItems] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
-    fetch("https://api.jsonbin.io/v3/b/65b3810adc746540189b555c")
+    fetch('https://api.jsonbin.io/v3/b/65b3810adc746540189b555c')
       .then((response) => response.json())
       .then((data) => {
         setData(data.record.applications);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
         setLoading(false);
       });
   }, []);
@@ -46,22 +46,22 @@ export default function ApplicationsPage() {
     const selectedItems = filteredData.filter(
       (_, index) => checkedItems[index]
     );
-    console.log("Selected Items:", selectedItems);
+    console.log('Selected Items:', selectedItems);
   };
 
   return (
     <div>
-      <h1 className={`mb-8 text-4xl font-bold`}>Applications</h1>
-      <div className="flex flex-row  w-full justify-between mb-4">
-        <div className="w-full ">
+      <h1 className="mb-8 text-4xl font-bold">Applications</h1>
+      <div className="flex flex-row w-full justify-between mb-4">
+        <div className="w-full">
           <Input
             aria-label="Search"
             classNames={{
-              inputWrapper: "bg-default-100",
-              input: "text-sm w-full",
+              inputWrapper: 'bg-default-100',
+              input: 'text-sm w-full',
             }}
             endContent={
-              <Kbd className="hidden lg:inline-block" keys={["command"]}>
+              <Kbd className="hidden lg:inline-block" keys={['command']}>
                 K
               </Kbd>
             }
@@ -77,7 +77,6 @@ export default function ApplicationsPage() {
         </div>
         <button
           onClick={handleDownloadClick}
-          //do it with white and black
           className="ml-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
         >
           Download
@@ -95,16 +94,15 @@ export default function ApplicationsPage() {
             >
               <Checkbox
                 className="ml-2 mr-2"
-                checked={checkedItems[index] || false}
+                isSelected={checkedItems[index] || false}
                 onChange={() => handleCheckboxChange(index)}
               />
               <Image
                 src={image}
                 width={32}
                 height={32}
-                placeholder="blur"
+                alt={name}
                 className="rounded-full"
-                alt={image}
               />
               <h2 className="ml-4 text-foreground/90 text-lg font-medium">
                 {name}
