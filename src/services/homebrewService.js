@@ -10,10 +10,11 @@ const homebrewService = async () => {
     const packages = [];
     const data = response.data;
     for(let i=0;i<data.length;i++){
-        packages.push({
-            packageName: data[i].name,
-            installCommand: "brew install "+data[i].name,
-          });
+      packages.push({
+          packageName: data[i].name,
+          installCommand: "brew install "+data[i].name,
+          packageDesc: data[i].desc,
+        });
     }
     if (packages.length > 0) {
         const collection = DataBase.ConnectToCollection('homebrew');

@@ -22,6 +22,7 @@ const chocoScrappingService = async () => {
           const packageName = packageAnchor.contents().filter(function() {
             return this.nodeType === 3;
           }).text().trim();
+          const packageDesc = $(element).find('p.mt-2.mb-0.package-list-align').text().trim();
           const installCommand = $(element).find('input').val();
   
           if (imageSrc && packageName && installCommand) {
@@ -29,6 +30,7 @@ const chocoScrappingService = async () => {
               imageSrc: imageSrc,
               packageName: packageName,
               installCommand: installCommand,
+              packageDesc:packageDesc,
             });
           }
         });

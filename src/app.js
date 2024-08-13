@@ -7,6 +7,12 @@ const homebrewRouter = require('./routes/homebrewRouter');
 
 const app = express();
 
+app.get("/",(req,res,next) => {
+    const userAgent = req.headers['user-agent'];
+    console.log("User-Agent:", userAgent);
+    next();
+})
+
 // Serve the static files from the 'out' directory
 app.use(express.static(path.join(__dirname, '../client/out')));
 
